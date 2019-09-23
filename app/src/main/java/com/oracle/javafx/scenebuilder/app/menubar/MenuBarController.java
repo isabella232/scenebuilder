@@ -312,10 +312,6 @@ public class MenuBarController {
     @FXML
     private MenuItem showPreviewInDialogMenuItem;
     @FXML
-    private RadioMenuItem gluonMobileLightThemeMenuItem;
-    @FXML
-    private RadioMenuItem gluonMobileDarkThemeMenuItem;
-    @FXML
     private RadioMenuItem modenaThemeMenuItem;
     @FXML
     private RadioMenuItem modenaTouchThemeMenuItem;
@@ -588,8 +584,6 @@ public class MenuBarController {
 
         assert showPreviewInWindowMenuItem != null;
         assert showPreviewInDialogMenuItem != null;
-        assert gluonMobileLightThemeMenuItem != null;
-        assert gluonMobileDarkThemeMenuItem != null;
         assert modenaThemeMenuItem != null;
         assert modenaTouchThemeMenuItem != null;
         assert modenaHighContrastBlackonwhiteThemeMenuItem != null;
@@ -1011,52 +1005,11 @@ public class MenuBarController {
         caspianEmbeddedThemeMenuItem.setUserData(new SetThemeActionController(EditorPlatform.Theme.CASPIAN_EMBEDDED));
         caspianEmbeddedQVGAThemeMenuItem.setUserData(new SetThemeActionController(EditorPlatform.Theme.CASPIAN_EMBEDDED_QVGA));
 
-        gluonMobileLightThemeMenuItem.setUserData(new SetThemeActionController(EditorPlatform.Theme.GLUON_MOBILE_LIGHT));
-        gluonMobileDarkThemeMenuItem.setUserData(new SetThemeActionController(EditorPlatform.Theme.GLUON_MOBILE_DARK));
         modenaThemeMenuItem.setUserData(new SetThemeActionController(EditorPlatform.Theme.MODENA));
         modenaTouchThemeMenuItem.setUserData(new SetThemeActionController(EditorPlatform.Theme.MODENA_TOUCH));
         modenaHighContrastBlackonwhiteThemeMenuItem.setUserData(new SetThemeActionController(EditorPlatform.Theme.MODENA_HIGH_CONTRAST_BLACK_ON_WHITE));
         modenaHighContrastWhiteonblackThemeMenuItem.setUserData(new SetThemeActionController(EditorPlatform.Theme.MODENA_HIGH_CONTRAST_WHITE_ON_BLACK));
         modenaHighContrastYellowonblackThemeMenuItem.setUserData(new SetThemeActionController(EditorPlatform.Theme.MODENA_HIGH_CONTRAST_YELLOW_ON_BLACK));
-
-        blueSwatch.setUserData(new GluonActionController(EditorPlatform.GluonSwatch.BLUE));
-        addSwatchGraphic(blueSwatch);
-        cyanSwatch.setUserData(new GluonActionController(EditorPlatform.GluonSwatch.CYAN));
-        addSwatchGraphic(cyanSwatch);
-        deepOrangeSwatch.setUserData(new GluonActionController(EditorPlatform.GluonSwatch.DEEP_ORANGE));
-        addSwatchGraphic(deepOrangeSwatch);
-        deepPurpleSwatch.setUserData(new GluonActionController(EditorPlatform.GluonSwatch.DEEP_PURPLE));
-        addSwatchGraphic(deepPurpleSwatch);
-        greenSwatch.setUserData(new GluonActionController(EditorPlatform.GluonSwatch.GREEN));
-        addSwatchGraphic(greenSwatch);
-        indigoSwatch.setUserData(new GluonActionController(EditorPlatform.GluonSwatch.INDIGO));
-        addSwatchGraphic(indigoSwatch);
-        lightBlueSwatch.setUserData(new GluonActionController(EditorPlatform.GluonSwatch.LIGHT_BLUE));
-        addSwatchGraphic(lightBlueSwatch);
-        pinkSwatch.setUserData(new GluonActionController(EditorPlatform.GluonSwatch.PINK));
-        addSwatchGraphic(pinkSwatch);
-        purpleSwatch.setUserData(new GluonActionController(EditorPlatform.GluonSwatch.PURPLE));
-        addSwatchGraphic(purpleSwatch);
-        redSwatch.setUserData(new GluonActionController(EditorPlatform.GluonSwatch.RED));
-        addSwatchGraphic(redSwatch);
-        tealSwatch.setUserData(new GluonActionController(EditorPlatform.GluonSwatch.TEAL));
-        addSwatchGraphic(tealSwatch);
-        lightGreenSwatch.setUserData(new GluonActionController(EditorPlatform.GluonSwatch.LIGHT_GREEN));
-        addSwatchGraphic(lightGreenSwatch);
-        limeSwatch.setUserData(new GluonActionController(EditorPlatform.GluonSwatch.LIME));
-        addSwatchGraphic(limeSwatch);
-        yellowSwatch.setUserData(new GluonActionController(EditorPlatform.GluonSwatch.YELLOW));
-        addSwatchGraphic(yellowSwatch);
-        amberSwatch.setUserData(new GluonActionController(EditorPlatform.GluonSwatch.AMBER));
-        addSwatchGraphic(amberSwatch);
-        orangeSwatch.setUserData(new GluonActionController(EditorPlatform.GluonSwatch.ORANGE));
-        addSwatchGraphic(orangeSwatch);
-        brownSwatch.setUserData(new GluonActionController(EditorPlatform.GluonSwatch.BROWN));
-        addSwatchGraphic(brownSwatch);
-        greySwatch.setUserData(new GluonActionController(EditorPlatform.GluonSwatch.GREY));
-        addSwatchGraphic(greySwatch);
-        blueGreySwatch.setUserData(new GluonActionController(EditorPlatform.GluonSwatch.BLUE_GREY));
-        addSwatchGraphic(blueGreySwatch);
 
         addSceneStyleSheetMenuItem.setUserData(new DocumentControlActionController(DocumentControlAction.ADD_SCENE_STYLE_SHEET));
         updateOpenAndRemoveSceneStyleSheetMenus();
@@ -1136,10 +1089,6 @@ public class MenuBarController {
         insertMenu.setOnMenuValidation(onCustomPartOfInsertMenuValidationHandler);
         
         windowMenu.setOnMenuValidation(onWindowMenuValidationHandler);
-    }
-
-    private void addSwatchGraphic(RadioMenuItem swatchMenuItem) {
-        swatchMenuItem.setGraphic(((GluonActionController)swatchMenuItem.getUserData()).getSwatch().createGraphic());
     }
 
     /*
@@ -2231,11 +2180,6 @@ public class MenuBarController {
             }
 
             documentWindowController.getEditorController().setTheme(overridingTheme);
-            if (overridingTheme == EditorPlatform.Theme.GLUON_MOBILE_LIGHT) {
-                documentWindowController.getEditorController().setGluonTheme(EditorPlatform.GluonTheme.LIGHT);
-            } else if (overridingTheme == EditorPlatform.Theme.GLUON_MOBILE_DARK) {
-                documentWindowController.getEditorController().setGluonTheme(EditorPlatform.GluonTheme.DARK);
-            }
         }
 
         @Override
@@ -2249,12 +2193,6 @@ public class MenuBarController {
                         = documentWindowController.getEditorController().getTheme();
 
                 switch (theme) {
-                    case GLUON_MOBILE_LIGHT:
-                        res = EditorPlatform.isGluonMobileLight(currentTheme);
-                        break;
-                    case GLUON_MOBILE_DARK:
-                        res = EditorPlatform.isGluonMobileDark(currentTheme);
-                        break;
                     // CASPIAN_HIGH_CONTRAST can be selected only if another CASPIAN
                     // theme is active.
                     case CASPIAN_HIGH_CONTRAST:
@@ -2296,42 +2234,6 @@ public class MenuBarController {
                 }
             }
 
-            return res;
-        }
-    }
-
-    class GluonActionController extends MenuItemController {
-
-        private EditorPlatform.GluonSwatch gluonSwatch;
-
-        public GluonActionController(EditorPlatform.GluonSwatch gluonSwatch) {
-            this.gluonSwatch = gluonSwatch;
-        }
-
-        public EditorPlatform.GluonSwatch getSwatch() {
-            return gluonSwatch;
-        }
-
-        @Override
-        public boolean canPerform() {
-            EditorPlatform.Theme currentTheme
-                    = documentWindowController.getEditorController().getTheme();
-            return currentTheme.equals(EditorPlatform.Theme.GLUON_MOBILE_LIGHT) || currentTheme.equals(EditorPlatform.Theme.GLUON_MOBILE_DARK);
-        }
-
-        @Override
-        public void perform() {
-            documentWindowController.getEditorController().setGluonSwatch(gluonSwatch);
-        }
-
-        @Override
-        public boolean isSelected() {
-            boolean res = false;
-            if (documentWindowController == null) {
-                res = false;
-            } else if (gluonSwatch != null) {
-                res = gluonSwatch == documentWindowController.getEditorController().getGluonSwatch();
-            }
             return res;
         }
     }

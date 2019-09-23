@@ -120,8 +120,6 @@ public class PreferencesRecordDocument {
     private final List<String> sceneStyleSheets = new ArrayList<>();
     private String I18NResource = null;
     private EditorPlatform.Theme theme;
-    private EditorPlatform.GluonSwatch gluonSwatch;
-    private EditorPlatform.GluonTheme gluonTheme;
 
     private Preferences documentPreferences;
     private final Preferences documentsRootPreferences; // preference root node for all documents records
@@ -171,8 +169,6 @@ public class PreferencesRecordDocument {
 
         // Add theme and Gluon theme listener
         ec.themeProperty().addListener(((observable, oldValue, newValue) -> setTheme(newValue)));
-        ec.gluonSwatchProperty().addListener(((observable, oldValue, newValue) -> setGluonSwatch(newValue)));
-        ec.gluonThemeProperty().addListener(((observable, oldValue, newValue) -> setGluonTheme(newValue)));
     }
     
     public void resetDocumentPreferences() {
@@ -338,27 +334,6 @@ public class PreferencesRecordDocument {
         return theme;
     }
 
-    public void setGluonSwatch(EditorPlatform.GluonSwatch gluonSwatch) {
-        this.gluonSwatch = gluonSwatch;
-    }
-
-    public EditorPlatform.GluonSwatch getGluonSwatch() {
-        if (gluonSwatch == null) {
-            return documentWindowController.getEditorController().getGluonSwatch();
-        }
-        return gluonSwatch;
-    }
-
-    public void setGluonTheme(EditorPlatform.GluonTheme gluonTheme) {
-        this.gluonTheme = gluonTheme;
-    }
-
-    public EditorPlatform.GluonTheme getGluonTheme() {
-        if (gluonTheme == null) {
-            return documentWindowController.getEditorController().getGluonTheme();
-        }
-        return gluonTheme;
-    }
 
     public void refreshXPos() {
         if (xPos != UNDEFINED_POS) {
@@ -485,24 +460,6 @@ public class PreferencesRecordDocument {
         editorController.setTheme(theme);
     }
 
-    public void refreshGluonSwatch() {
-        if (gluonSwatch == null) {
-            return;
-        }
-
-        EditorController editorController = documentWindowController.getEditorController();
-        editorController.setGluonSwatch(gluonSwatch);
-    }
-
-    public void refreshGluonTheme() {
-        if (gluonTheme == null) {
-            return;
-        }
-
-        EditorController editorController = documentWindowController.getEditorController();
-        editorController.setGluonTheme(gluonTheme);
-    }
-
     public void refresh() {
         refreshXPos();
         refreshYPos();
@@ -521,8 +478,6 @@ public class PreferencesRecordDocument {
         refreshSceneStyleSheets();
         refreshI18NResource();
         refreshTheme();
-        refreshGluonSwatch();
-        refreshGluonTheme();
     }
 
     /**
@@ -649,20 +604,6 @@ public class PreferencesRecordDocument {
         } else {
             setTheme(documentWindowController.getEditorController().getTheme());
         }
-        
-        final String gluonSwatch = documentPreferences.get(GLUON_SWATCH, null);
-        if (gluonSwatch != null) {
-            setGluonSwatch(EditorPlatform.GluonSwatch.valueOf(gluonSwatch));
-        } else {
-            setGluonSwatch(documentWindowController.getEditorController().getGluonSwatch());
-        }
-
-        final String gluonTheme = documentPreferences.get(GLUON_THEME, null);
-        if (gluonTheme != null) {
-            setGluonTheme(EditorPlatform.GluonTheme.valueOf(gluonTheme));
-        } else {
-            setGluonTheme(documentWindowController.getEditorController().getGluonTheme());
-        }
     }
 
     /**
@@ -744,13 +685,8 @@ public class PreferencesRecordDocument {
         // Theme and Gluon Theme
         final EditorPlatform.Theme docTheme = getTheme();
         documentPreferences.put(THEME, docTheme.name());
-        if (docTheme == EditorPlatform.Theme.GLUON_MOBILE_LIGHT || docTheme == EditorPlatform.Theme.GLUON_MOBILE_DARK) {
-            documentPreferences.put(GLUON_SWATCH, getGluonSwatch().name());
-            documentPreferences.put(GLUON_THEME, getGluonTheme().name());
-        } else {
-            documentPreferences.remove(GLUON_SWATCH);
-            documentPreferences.remove(GLUON_THEME);
-        }
+        documentPreferences.remove(GLUON_SWATCH);
+        documentPreferences.remove(GLUON_THEME);
     }
 
     /**
