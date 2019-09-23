@@ -1,0 +1,37 @@
+//[JB] Relies on build artifacts, so run `gradle jar` first.
+
+plugins { id 'com.jfrog.bintray' version '1.8.4' }
+
+apply plugin: 'maven-publish'
+
+repositories { jcenter() }
+configure(project) {
+  project.ext.jarFile = "scenebuilder-kit-${project.version}.jar"
+}
+
+publishing {
+  publications {
+    BinTray(MavenPublication) {
+      groupId 'org.jetbrains.intellij.deps'
+      artifactId 'scenebuilder'
+      artifact source: project.ext.jarFile
+    }
+  }
+}
+
+bintray {
+  user = System.getenv('BINTRAY_USER')
+  key = System.getenv('BINTRAY_KEY')
+  publish = true
+
+  pkg {
+    repo = 'intellij-third-party-dependencies'
+    userOrg = 'jetbrains'
+    name = 'scenebuilder'
+    vcsUrl = 'https://github.com/JetBrains/scenebuilder'
+    licenses = ['BSD']
+    version { name = project.version }
+  }
+
+  publications = ['BinTray']
+}
