@@ -139,6 +139,16 @@ public class LibraryPanelController extends AbstractFxmlPanelController {
      *
      * @param c the editor controller (never null).
      */
+    public LibraryPanelController(EditorController c) {
+        this(c, new MavenPreferences());
+    }
+
+
+    /**
+     * Creates a library panel controller for the specified editor controller.
+     *
+     * @param c the editor controller (never null).
+     */
     public LibraryPanelController(EditorController c, MavenPreferences mavenPreferences) {
         super(LibraryPanelController.class.getResource("LibraryPanel.fxml"), I18N.getBundle(), c); //NOI18N
         startListeningToLibrary();
