@@ -267,10 +267,6 @@ public class EditorController {
             = new SimpleObjectProperty<>(new BuiltinGlossary());
     private final ObjectProperty<ResourceBundle> resourcesProperty
             = new SimpleObjectProperty<>(null);
-    private final ObjectProperty<EditorPlatform.GluonTheme> gluonThemeProperty
-            = new SimpleObjectProperty<>(EditorPlatform.DEFAULT_GLUON_THEME);
-    private final ObjectProperty<EditorPlatform.GluonSwatch> gluonSwatchProperty
-            = new SimpleObjectProperty<>(EditorPlatform.DEFAULT_SWATCH);
     private final ListProperty<File> sceneStyleSheetProperty
             = new SimpleListProperty<>();
     private final BooleanProperty pickModeEnabledProperty
@@ -580,64 +576,6 @@ public class EditorController {
      */
     public ObservableValue<Theme> themeProperty() {
         return themeProperty;
-    }
-
-    /**
-     * Returns the gluon theme used by this editor
-     *
-     * @return the gluon theme used by this editor
-     */
-    public EditorPlatform.GluonTheme getGluonTheme() {
-        return gluonThemeProperty.get();
-    }
-
-    /**
-     * Sets the gluon theme used by this editor.
-     * Content and Preview panels sharing this editor will update
-     * their content to use this new theme.
-     *
-     * @param theme the theme to be used in this editor
-     */
-    public void setGluonTheme(EditorPlatform.GluonTheme theme) {
-        gluonThemeProperty.set(theme);
-    }
-
-    /**
-     * The property holding the gluon theme used by this editor
-     *
-     * @return the property holding the gluon theme used by this editor.
-     */
-    public ObjectProperty<EditorPlatform.GluonTheme> gluonThemeProperty() {
-        return gluonThemeProperty;
-    }
-
-    /**
-     * Sets the gluon swatch used by this editor.
-     * Content and Preview panels sharing this editor will update
-     * their content to use this new swatch.
-     *
-     * @param swatch the swatch to be used in this editor
-     */
-    public void setGluonSwatch(EditorPlatform.GluonSwatch swatch) {
-        gluonSwatchProperty.set(swatch);
-    }
-
-    /**
-     * Returns the gluon swatch used by this editor
-     *
-     * @return the gluon swatch used by this editor
-     */
-    public EditorPlatform.GluonSwatch getGluonSwatch() {
-        return gluonSwatchProperty.get();
-    }
-
-    /**
-     * The property holding the gluon swatch used by this editor
-     *
-     * @return the property holding the gluon swatch used by this editor.
-     */
-    public ObjectProperty<EditorPlatform.GluonSwatch> gluonSwatchProperty() {
-        return gluonSwatchProperty;
     }
 
     /**

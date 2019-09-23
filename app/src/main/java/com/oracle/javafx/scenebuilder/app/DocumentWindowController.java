@@ -543,12 +543,10 @@ public class DocumentWindowController extends AbstractFxmlWindowController {
 
     public void refreshSwatch(PreferencesRecordGlobal preferencesRecordGlobal) {
         final EditorController ec = getEditorController();
-        ec.setGluonSwatch(preferencesRecordGlobal.getSwatch());
     }
 
     public void refreshGluonTheme(PreferencesRecordGlobal preferencesRecordGlobal) {
         final EditorController ec = getEditorController();
-        ec.setGluonTheme(preferencesRecordGlobal.getGluonTheme());
     }
 
     public void refreshAccordionAnimation(PreferencesRecordGlobal preferencesRecordGlobal) {

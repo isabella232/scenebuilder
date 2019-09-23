@@ -32,11 +32,6 @@
  */
 package com.oracle.javafx.scenebuilder.kit.metadata.util;
 
-import com.gluonhq.charm.glisten.control.BottomNavigation;
-import com.oracle.javafx.scenebuilder.kit.editor.EditorPlatform;
-import com.gluonhq.charm.glisten.control.DropdownButton;
-import com.gluonhq.charm.glisten.control.ExpansionPanel;
-import com.gluonhq.charm.glisten.control.ToggleButtonGroup;
 import com.oracle.javafx.scenebuilder.kit.editor.EditorPlatform;
 import com.oracle.javafx.scenebuilder.kit.editor.images.ImageUtils;
 import com.oracle.javafx.scenebuilder.kit.fxom.FXOMCollection;
@@ -431,26 +426,20 @@ public class DesignHierarchyMask {
         switch (accessory) {
             case CONTENT:
             case GRAPHIC:
-                if (sceneGraphObject instanceof DialogPane == true || sceneGraphObject  instanceof ExpansionPanel.ExpandedPanel == true) {
+                if (sceneGraphObject instanceof DialogPane == true ) {
                     return false;
                 }
                 break;
             case DP_CONTENT:
             case DP_GRAPHIC:
-                if (sceneGraphObject instanceof DialogPane == false || sceneGraphObject instanceof ExpansionPanel.ExpandedPanel == true) {
+                if (sceneGraphObject instanceof DialogPane == false) {
                     return false;
                 }
                 break;
             case EXPANDABLE_CONTENT:
             case COLLAPSED_CONTENT:
-                if (sceneGraphObject instanceof ExpansionPanel == false) {
-                    return false;
-                }
                 break;
             case EX_CONTENT:
-                if (sceneGraphObject instanceof ExpansionPanel.ExpandedPanel == false) {
-                    return false;
-                }
                 break;
             default:
                 break;
@@ -1082,11 +1071,6 @@ public class DesignHierarchyMask {
                 || this.isAcceptingAccessory(Accessory.LEFT))
                 && ! (fxomObject.getSceneGraphObject() instanceof MenuButton
                         || fxomObject.getSceneGraphObject() instanceof MenuBar
-                        || fxomObject.getSceneGraphObject() instanceof ToolBar
-                        || fxomObject.getSceneGraphObject() instanceof ExpansionPanel.ExpandedPanel
-                        || fxomObject.getSceneGraphObject() instanceof DropdownButton
-                        || fxomObject.getSceneGraphObject() instanceof BottomNavigation
-                        || fxomObject.getSceneGraphObject() instanceof ExpansionPanel.CollapsedPanel
-                        || fxomObject.getSceneGraphObject() instanceof ToggleButtonGroup); // Jerome
+                        || fxomObject.getSceneGraphObject() instanceof ToolBar); // Jerome
     }
 }
