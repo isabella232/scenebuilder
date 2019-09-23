@@ -198,10 +198,7 @@ public class ContentPanelController extends AbstractFxmlPanelController
         editorController.themeProperty().addListener((ChangeListener<Theme>) (ov, t, t1) -> themeDidChange()
         );
 
-        editorController.gluonSwatchProperty().addListener(((observable, oldValue, newValue) -> themeDidChange()));
 
-        editorController.gluonThemeProperty().addListener(((observable, oldValue, newValue) -> themeDidChange()));
-        
         editorController.sceneStyleSheetProperty().addListener((ListChangeListener<File>) change -> sceneStyleSheetsDidChange()
         );
         editorController.pickModeEnabledProperty().addListener((ChangeListener<Boolean>) (ov, t, t1) -> pickModeDidChange()
@@ -1072,10 +1069,8 @@ public class ContentPanelController extends AbstractFxmlPanelController
     private void themeDidChange() {
         if (contentGroup != null) {
             final EditorPlatform.Theme theme = getEditorController().getTheme();
-            final EditorPlatform.GluonSwatch gluonSwatch = getEditorController().getGluonSwatch();
-            final EditorPlatform.GluonTheme gluonTheme = getEditorController().getGluonTheme();
             final String themeStyleSheet = theme.getStylesheetURL();
-            workspaceController.setThemeStyleSheet(themeStyleSheet, theme, gluonSwatch, gluonTheme);
+            workspaceController.setThemeStyleSheet(themeStyleSheet, theme);
         }
     }
     

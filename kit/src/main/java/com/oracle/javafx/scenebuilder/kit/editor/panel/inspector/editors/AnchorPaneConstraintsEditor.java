@@ -305,7 +305,6 @@ public class AnchorPaneConstraintsEditor extends PropertiesEditor {
         @Override
         public Node getValueEditor() {
             // Should not be called
-            assert false;
             return null;
         }
 

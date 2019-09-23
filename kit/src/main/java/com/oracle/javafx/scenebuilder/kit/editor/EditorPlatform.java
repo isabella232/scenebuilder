@@ -32,7 +32,6 @@
  */
 package com.oracle.javafx.scenebuilder.kit.editor;
 
-import com.gluonhq.charm.glisten.visual.GlistenStyleClasses;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -103,15 +102,6 @@ public class EditorPlatform {
      */
     public static final Theme DEFAULT_THEME = Theme.MODENA;
 
-    /**
-     * Default Gluon Swatch
-     */
-    public static final EditorPlatform.GluonSwatch DEFAULT_SWATCH = GluonSwatch.BLUE;
-
-    /**
-     * Default Gluon Theme
-     */
-    public static final EditorPlatform.GluonTheme DEFAULT_GLUON_THEME = GluonTheme.LIGHT;
 
     interface StylesheetProvider {
         String getStylesheetURL();
@@ -121,8 +111,6 @@ public class EditorPlatform {
      * Themes supported by Scene Builder Kit.
      */
     public enum Theme implements StylesheetProvider {
-        GLUON_MOBILE_LIGHT(GlistenStyleClasses.impl_loadResource("glisten.gls")),
-        GLUON_MOBILE_DARK(GlistenStyleClasses.impl_loadResource("glisten.gls")),
         MODENA("com/sun/javafx/scene/control/skin/modena/modena.bss"),
         MODENA_TOUCH("com/oracle/javafx/scenebuilder/kit/util/css/modena/modena-touch.css"),
         MODENA_HIGH_CONTRAST_BLACK_ON_WHITE("com/oracle/javafx/scenebuilder/kit/util/css/modena/modena-highContrast-blackOnWhite.css"),
@@ -156,97 +144,6 @@ public class EditorPlatform {
         }
     }
 
-    /**
-     * Gluon Swatch
-     */
-    public enum GluonSwatch implements StylesheetProvider {
-        BLUE,
-        CYAN,
-        DEEP_ORANGE,
-        DEEP_PURPLE,
-        GREEN,
-        INDIGO,
-        LIGHT_BLUE,
-        PINK,
-        PURPLE,
-        RED,
-        TEAL,
-        LIGHT_GREEN,
-        LIME,
-        YELLOW,
-        AMBER,
-        ORANGE,
-        BROWN,
-        GREY,
-        BLUE_GREY;
-
-        private static final String PRIMARY_SWATCH_500_STR = "-primary-swatch-500:";
-
-        Color color;
-
-        @Override
-        public String toString() {
-            String lowerCaseSwatch = "title.gluon.swatch." + name().toLowerCase(Locale.ROOT);
-            return I18N.getString(lowerCaseSwatch);
-        }
-
-        @Override
-        public String getStylesheetURL() {
-            return GlistenStyleClasses.impl_loadResource("swatch_" + name().toLowerCase(Locale.ROOT) + ".gls");
-        }
-
-        public Color getColor() {
-            if (color == null) {
-                URL url = null;
-                try {
-                    url = new URL(getStylesheetURL());
-                    try (BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()))) {
-                        String s = reader.readLine();
-                        while (s != null) {
-                            // Remove white spaces
-                            String trimmedString = s.replaceAll("\\s+", "");
-                            int indexOf = trimmedString.indexOf(PRIMARY_SWATCH_500_STR);
-                            if (indexOf != -1) {
-                                int indexOfSemiColon = trimmedString.indexOf(";");
-                                String colorString = trimmedString.substring(indexOf + PRIMARY_SWATCH_500_STR.length(), indexOfSemiColon);
-                                color = Color.web(colorString);
-                            }
-                            s = reader.readLine();
-                        }
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            return color;
-        }
-
-        public Node createGraphic() {
-            Rectangle rect = new Rectangle(8, 8);
-            rect.setFill(getColor());
-            rect.setStroke(Color.BLACK);
-            return rect;
-        }
-    }
-
-    /**
-     * Gluon Theme
-     */
-    public enum GluonTheme implements StylesheetProvider {
-        LIGHT,
-        DARK;
-
-        @Override
-        public String toString() {
-            String lowerCaseName = "title.gluon.theme." + name().toLowerCase(Locale.ROOT);
-            return I18N.getString(lowerCaseName);
-        }
-
-        @Override
-        public String getStylesheetURL() {
-            return GlistenStyleClasses.impl_loadResource("theme_" + name().toLowerCase(Locale.ROOT) + ".gls");
-        }
-    }
     
     public static String getPlatformThemeStylesheetURL() {
         // Return USER_AGENT css, which is Modena for fx 8.0
@@ -294,12 +191,6 @@ public class EditorPlatform {
     
     public static boolean isCaspian(Theme theme) {
         return theme.toString().startsWith("CASPIAN");
-    }
-
-    public static boolean isGluonMobileLight(Theme theme) { return theme == Theme.GLUON_MOBILE_LIGHT; }
-
-    public static boolean isGluonMobileDark(Theme theme) {
-        return theme == Theme.GLUON_MOBILE_DARK;
     }
 
     /**
