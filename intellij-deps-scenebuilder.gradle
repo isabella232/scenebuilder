@@ -14,7 +14,7 @@ publishing {
   publications {
     BinTray(MavenPublication) {
       groupId 'org.jetbrains.intellij.deps'
-      artifactId 'scenebuilder'
+      artifactId 'scenebuilderkit'
       artifact source: project.ext.jarFile
     }
   }
@@ -28,7 +28,7 @@ bintray {
   pkg {
     repo = 'intellij-third-party-dependencies'
     userOrg = 'jetbrains'
-    name = 'scenebuilder'
+    name = 'scenebuilderkit'
     vcsUrl = 'https://github.com/JetBrains/scenebuilder'
     licenses = ['BSD']
     version { name = project.version }
