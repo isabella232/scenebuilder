@@ -330,23 +330,32 @@ public class EditorController {
     /**
      * Sets the fxml content to be edited by this editor.
      * A null value makes this editor empty.
-     * 
+     *
      * @param fxmlText null or the fxml text to be edited
      * @throws IOException if fxml text cannot be parsed and loaded correctly.
      */
     public void setFxmlText(String fxmlText, boolean checkGluonControls) throws IOException {
         setFxmlTextAndLocation(fxmlText, getFxmlLocation(), checkGluonControls);
     }
-    
+
     /**
      * Returns null or the fxml content being edited by this editor.
-     * 
+     *
+     * @return null or the fxml content being edited by this editor.
+     */
+    public String getFxmlText() {
+        return getFxmlText(true);
+    }
+
+    /**
+     * Returns null or the fxml content being edited by this editor.
+     *
      * @return null or the fxml content being edited by this editor.
      * @param wildcardImports If the FXML should have wildcards in its imports.
      */
     public String getFxmlText(boolean wildcardImports) {
         final String result;
-        
+
         final FXOMDocument fxomDocument = getFxomDocument();
         if (fxomDocument == null) {
             result = null;
@@ -360,10 +369,10 @@ public class EditorController {
                 fxomDocument.setSampleDataEnabled(true);
             }
         }
-        
+
         return result;
     }
-    
+
     /**
      * Returns true if fxml content being edited can be returned safely.
      * This method will return false if there is a text editing session on-going.
