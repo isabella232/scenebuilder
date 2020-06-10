@@ -159,4 +159,8 @@ public class JavaFXPlatformHelper {
       return BuiltinLibrary.getLibrary().getSectionComparator().compare(s1, s2);
     }
   }
+  
+  public static List<LibraryItem> getBuiltinLibraryItems() {
+    return BuiltinLibrary.getLibrary().getItems();
+  }
 }
