@@ -6,7 +6,7 @@ apply plugin: 'maven-publish'
 
 repositories { jcenter() }
 configure(project) {
-  project.version = "11.0.3"
+  project.version = "11.0.4"
   project.ext.jarFile = "kit/build/libs/scenebuilder-kit-${project.version}.jar"
 }
 
