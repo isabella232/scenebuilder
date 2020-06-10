@@ -19,7 +19,7 @@ subprojects {
 
     group = 'com.gluonhq.scenebuilder'
 
-    version = "11.0.3"
+    version = "11.0.4"
 
     ext.buildDateFormat = version.endsWith('-SNAPSHOT') ? 'yyyy-MM-dd HH:mm:ss' : 'yyyy-MM-dd'
 
