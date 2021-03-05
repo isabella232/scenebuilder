@@ -1,5 +1,7 @@
 plugins {
-    id 'org.openjfx.javafxplugin' version '0.0.7' apply false
+    id 'maven'
+    id 'org.openjfx.javafxplugin' version '0.0.9' apply false
+    id 'org.beryx.runtime' version '1.11.4' apply false
 }
 
 apply plugin: 'base'
@@ -73,8 +75,6 @@ subprojects {
 clean {
     delete "dist"
 }
-
-apply plugin: 'maven'
 
 uploadArchives {
     repositories {
